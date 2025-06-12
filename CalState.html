@@ -21,7 +21,13 @@
             background-color: #f9fafb;
         }
         .header-bg {
-            background-image: linear-gradient(135deg, #00aeef 0%, #8dc73f 100%);
+            background-color: #2d3748;
+        }
+        .pie-chart {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
         }
     </style>
 </head>
@@ -59,12 +65,12 @@
                                 <!-- Dynamically generated rows -->
                                 <script>
                                     const statuses = {
-                                        customer: '<div class="h-5 w-5 bg-green-500 rounded-full" title="Customer"></div>',
-                                        inConversation: '<div class="h-5 w-5 bg-blue-500 rounded-full" title="In Conversation"></div>',
+                                        customer: '<div class="h-5 w-5 bg-[#8dc73f] rounded-full" title="Customer"></div>',
+                                        inConversation: '<div class="h-5 w-5 bg-[#00aeef] rounded-full" title="In Conversation"></div>',
                                         roi: '<div class="h-5 w-5 bg-yellow-400 rounded-full" title="ROI Participant"></div>',
                                         chancellorStar: '<svg class="h-6 w-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" title="Purchased by Chancellor\'s Office"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>',
-                                        goodFeelingIcon: '<svg class="h-6 w-6 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
-                                        inConversationIcon: '<div class="h-5 w-5 bg-blue-500 rounded-full" title="In Conversation"></div>',
+                                        goodFeelingIcon: '<svg class="h-6 w-6" style="color: #8dc73f;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
+                                        inConversationIcon: '<div class="h-5 w-5 bg-[#00aeef] rounded-full" title="In Conversation"></div>',
                                         empty: '<!-- Placeholder -->'
                                     };
                                     
@@ -97,32 +103,33 @@
                                     const allCampusNames = Object.keys(campusInfo);
 
                                     // Product Lists
-                                    let studyAbroadCustomers = ['Cal Poly State University','California Polytechnic University - Pomona','California State University - Chico','California State University - Fresno','California State University - Fullerton','California State University - Sacramento','California State University - San Marcos','California State University-Chancellors Office','California State University-Long Beach','California State University-Los Angeles','California State University-Northridge','California State University-San Bernardino','Humboldt State University','San Jose State University','San Diego State University'];
-                                    let isssCustomers = ['Cal Poly State University','California Polytechnic University - Pomona','California State University - Chico', 'California State University - Fullerton','California State University - Sacramento','California State University - San Marcos', 'California State University-Los Angeles'];
-                                    let riskRoi = ['Cal Poly State University', 'California Polytechnic University - Pomona', 'California State University - Sacramento', 'California State University-Chancellors Office', 'California State University-Los Angeles', 'California State University-Northridge', 'California State University-San Bernardino', 'San Diego State University', 'California State University - Fresno'];
-                                    let agreementsCustomers = ['California State University-Los Angeles'];
-                                    let agreementsInConversation = ['California Polytechnic University - Pomona'];
-                                    let dashboardsEngageCustomer = ['California State University-Los Angeles'];
-                                    let isssInConversation = ['San Diego State University', 'California State University-East Bay', 'California State University - Fresno'];
-                                    let engageInConversation = ['San Diego State University'];
-                                    let dashboardsInConversation = ['San Diego State University'];
+                                    let studyAbroadCustomers = ['Cal Poly State University','California Polytechnic University - Pomona','California State University - Chico','California State University - Fresno','California State University - Fullerton','California State University - Sacramento','California State University - San Marcos','California State University-Chancellors Office','California State University-Long Beach','California State University-Northridge','California State University-San Bernardino','Humboldt State University','San Jose State University','San Diego State University'];
+                                    let isssCustomers = ['Cal Poly State University','California Polytechnic University - Pomona','California State University - Chico', 'California State University - Fullerton','California State University - Sacramento','California State University - San Marcos'];
+                                    let riskRoi = ['Cal Poly State University', 'California Polytechnic University - Pomona', 'California State University - Sacramento', 'California State University-Los Angeles', 'California State University-Northridge', 'California State University-San Bernardino', 'San Diego State University', 'California State University - Fresno', 'Sonoma State University', 'California State University-Chancellors Office'];
+                                    let agreementsCustomers = ['California Polytechnic University - Pomona'];
+                                    let agreementsInConversation = ['California State University-Los Angeles', 'California State University-Long Beach'];
+                                    let dashboardsEngageCustomer = [];
+                                    let isssInConversation = ['San Diego State University', 'California State University-East Bay', 'California State University - Fresno', 'California State University-Long Beach'];
+                                    let engageInConversation = ['San Diego State University', 'California State University-Long Beach'];
+                                    let dashboardsInConversation = ['San Diego State University', 'California State University-Long Beach'];
+                                    let riskInConversation = ['California State University-Long Beach'];
 
                                     // Generate data for each campus
-                                    const campusData = allCampusNames.map(name => {
-                                        let isCustomer = studyAbroadCustomers.includes(name) || isssCustomers.includes(name) || dashboardsEngageCustomer.includes(name) || name === 'California Polytechnic University - Pomona' || agreementsCustomers.includes(name);
-                                        let hasActiveConversation = agreementsInConversation.includes(name) || isssInConversation.includes(name) || engageInConversation.includes(name) || dashboardsInConversation.includes(name);
+                                    let campusData = allCampusNames.map(name => {
+                                        let isCustomer = studyAbroadCustomers.includes(name) || isssCustomers.includes(name) || dashboardsEngageCustomer.includes(name) || agreementsCustomers.includes(name);
+                                        let hasActiveConversation = agreementsInConversation.includes(name) || isssInConversation.includes(name) || engageInConversation.includes(name) || dashboardsInConversation.includes(name) || riskInConversation.includes(name);
                                         let isRoiParticipant = riskRoi.includes(name);
 
+                                        // Special override for CSULA to own everything
                                         if (name === 'California State University-Los Angeles') {
                                             isCustomer = true;
                                             isRoiParticipant = true;
+                                            if(!studyAbroadCustomers.includes(name)) studyAbroadCustomers.push(name);
+                                            if(!isssCustomers.includes(name)) isssCustomers.push(name);
+                                            if(!agreementsCustomers.includes(name)) agreementsCustomers.push(name);
+                                            if(!dashboardsEngageCustomer.includes(name)) dashboardsEngageCustomer.push(name);
                                         }
-                                        if (name === 'California State University-Dominguez Hills' || name === 'Sonoma State University') {
-                                            isCustomer = false;
-                                            hasActiveConversation = false;
-                                            isRoiParticipant = false;
-                                        }
-
+                                       
                                         let overallStatus = '';
                                         if (isCustomer) {
                                             overallStatus += statuses.customer;
@@ -133,31 +140,31 @@
                                         if (!isCustomer && hasActiveConversation) {
                                             overallStatus = statuses.inConversation;
                                         }
-                                        if (overallStatus === '') {
-                                            overallStatus = statuses.empty;
-                                        }
-
+                                        
                                         const solutionData = {
-                                            studyAbroad: (name === 'California State University-Los Angeles' || studyAbroadCustomers.includes(name)) ? statuses.goodFeelingIcon : statuses.empty,
-                                            isss: (name === 'California State University-Los Angeles' || isssCustomers.includes(name)) ? statuses.goodFeelingIcon : (isssInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
-                                            risk: (name === 'California State University-Los Angeles' || riskRoi.includes(name)) ? (name === 'California State University-Chancellors Office' ? statuses.chancellorStar : statuses.goodFeelingIcon) : statuses.empty,
-                                            agreements: (name === 'California State University-Los Angeles' || agreementsCustomers.includes(name)) ? statuses.goodFeelingIcon : (agreementsInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
-                                            dashboards: (name === 'California State University-Los Angeles' || dashboardsEngageCustomer.includes(name)) ? statuses.goodFeelingIcon : (dashboardsInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
-                                            engage: (name === 'California State University-Los Angeles' || dashboardsEngageCustomer.includes(name)) ? statuses.goodFeelingIcon : (engageInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
+                                            studyAbroad: (studyAbroadCustomers.includes(name)) ? statuses.goodFeelingIcon : statuses.empty,
+                                            isss: (isssCustomers.includes(name)) ? statuses.goodFeelingIcon : (isssInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
+                                            risk: (riskRoi.includes(name) && name !== 'Sonoma State University') ? (name === 'California State University-Chancellors Office' ? statuses.chancellorStar : statuses.goodFeelingIcon) : (riskInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
+                                            agreements: (agreementsCustomers.includes(name)) ? statuses.goodFeelingIcon : (agreementsInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
+                                            dashboards: (dashboardsEngageCustomer.includes(name)) ? statuses.goodFeelingIcon : (dashboardsInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
+                                            engage: (dashboardsEngageCustomer.includes(name)) ? statuses.goodFeelingIcon : (engageInConversation.includes(name) ? statuses.inConversationIcon : statuses.empty),
                                         };
                                         
                                         if(name === 'California State University-Dominguez Hills' || name === 'Sonoma State University'){
                                             Object.keys(solutionData).forEach(k => solutionData[k] = statuses.empty);
                                         }
 
-                                        return { name, abbr: campusInfo[name], overallStatus, solutionData };
+                                        return { name, abbr: campusInfo[name], overallStatus, solutionData, hasStatus: overallStatus !== '' };
                                     });
+
+                                    // Sort campuses to move those with no status to the bottom
+                                    campusData.sort((a, b) => b.hasStatus - a.hasStatus);
 
                                     campusData.forEach((campus, index) => {
                                         const rowClass = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';
                                         let rowHTML = `<tr class="table-row-hover ${rowClass}">
                                             <td class="pl-3 pr-2 py-3 whitespace-nowrap text-sm text-gray-800" title="${campus.name}">${campus.abbr}</td>
-                                            <td class="px-2 py-3 whitespace-nowrap"><div class="flex justify-center items-center h-full">${campus.overallStatus}</div></td>
+                                            <td class="px-2 py-3 whitespace-nowrap"><div class="flex justify-center items-center h-full">${campus.overallStatus || statuses.empty}</div></td>
                                             <td class="px-2 py-3 whitespace-nowrap"><div class="flex justify-center items-center h-full">${campus.solutionData.studyAbroad}</div></td>
                                             <td class="px-2 py-3 whitespace-nowrap"><div class="flex justify-center items-center h-full">${campus.solutionData.isss}</div></td>
                                             <td class="px-2 py-3 whitespace-nowrap"><div class="flex justify-center items-center h-full">${campus.solutionData.risk}</div></td>
@@ -171,6 +178,23 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="mt-8 pt-6 border-t border-slate-200">
+                         <div class="flex items-center justify-center text-center">
+                            <div class="mr-4 h-12 w-12 flex-shrink-0 relative">
+                                <div class="absolute h-8 w-8 top-0 left-0" style="background-color: #00aeef;"></div>
+                                <div class="absolute h-8 w-8 top-4 left-4" style="background-color: #8dc73f;"></div>
+                                <div class="absolute h-8 w-8 top-2 left-2 opacity-75" style="background-color: #f57922;"></div>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-lg" style="color: #00aeef;">Terra Dotta</h3>
+                                <p class="text-sm text-gray-600">1330 Environ Way, Chapel Hill, NC 27517 | www.terradotta.com</p>
+                                <div class="mt-2 text-xs text-gray-500">
+                                    <p class="italic">"Built by Global Education for Global Education"</p>
+                                    <p class="font-bold tracking-wide mt-1">Market Leader for 20+ years and counting</p>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
                 </main>
 
                 <!-- Sidebar -->
@@ -179,11 +203,11 @@
                         <h3 class="text-lg text-gray-800 mb-3">Legend</h3>
                         <ul class="space-y-3">
                              <li class="flex items-center">
-                                <div class="h-5 w-5 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                                <div class="h-5 w-5 rounded-full mr-3 flex-shrink-0" style="background-color: #8dc73f;"></div>
                                 <span class="text-sm text-gray-700">Customer</span>
                             </li>
                             <li class="flex items-center">
-                                <div class="h-5 w-5 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
+                                <div class="h-5 w-5 rounded-full mr-3 flex-shrink-0" style="background-color: #00aeef;"></div>
                                 <span class="text-sm text-gray-700">In Conversation</span>
                             </li>
                             <li class="flex items-center">
@@ -191,7 +215,7 @@
                                 <span class="text-sm text-gray-700">ROI Participant</span>
                             </li>
                             <li class="flex items-center">
-                                <svg class="h-6 w-6 text-teal-500 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <svg class="h-6 w-6 mr-3 flex-shrink-0" style="color: #8dc73f;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                  <span class="text-sm text-gray-700">Solution is Active</span>
                             </li>
                              <li class="flex items-center">
@@ -203,24 +227,43 @@
                         <div class="my-6 border-t border-slate-200"></div>
 
                         <h3 class="text-lg text-gray-800 mb-3">Key Opportunities</h3>
-                        <ul class="space-y-3">
-                            <li class="text-sm text-gray-700">
-                                <strong class="text-blue-600 block">ISSS</strong>
-                                <span class="italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                            </li>
-                             <li class="text-sm text-gray-700">
-                                <strong class="text-blue-600 block">Agreements</strong>
-                                <span class="italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                            </li>
-                             <li class="text-sm text-gray-700">
-                                <strong class="text-blue-600 block">Engage & Dashboards</strong>
-                                <span class="italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                            </li>
-                            <li class="text-sm text-gray-700">
-                                <strong class="text-yellow-600 block">ROI Conversion</strong>
-                                 <span class="italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                            </li>
-                        </ul>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="pie-chart mr-4 flex-shrink-0" style="background: conic-gradient(#00aeef 63%, #e5e7eb 0);"></div>
+                                <div class="text-sm text-gray-700">
+                                    <strong class="text-blue-600 block">Study Abroad</strong>
+                                    <span>Unify the study abroad experience. <strong>9 of 24</strong> campuses have an opportunity to adopt.</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="pie-chart mr-4 flex-shrink-0" style="background: conic-gradient(#00aeef 29%, #e5e7eb 0);"></div>
+                                <div class="text-sm text-gray-700">
+                                    <strong class="text-blue-600 block">System-Wide ISSS Adoption</strong>
+                                    <span>To ensure compliance and equity, <strong>17 of 24</strong> campuses have an opportunity to adopt a unified ISSS platform.</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="pie-chart mr-4 flex-shrink-0" style="background: conic-gradient(#00aeef 8%, #e5e7eb 0);"></div>
+                                <div class="text-sm text-gray-700">
+                                    <strong class="text-blue-600 block">Agreements</strong>
+                                    <span>With <strong>22 of 24</strong> campuses yet to adopt, there is a significant opportunity to streamline partnership management.</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="pie-chart mr-4 flex-shrink-0" style="background: conic-gradient(#00aeef 4%, #e5e7eb 0);"></div>
+                                <div class="text-sm text-gray-700">
+                                    <strong class="text-blue-600 block">Engage & Dashboards</strong>
+                                    <span>Enhance the student experience system-wide. <strong>23 of 24</strong> campuses have an opportunity to adopt.</span>
+                                </div>
+                            </div>
+                             <div class="flex items-center">
+                                <div class="pie-chart mr-4 flex-shrink-0 bg-yellow-400"></div>
+                                <div class="text-sm text-gray-700">
+                                    <strong class="text-yellow-600 block">Proven ROI</strong>
+                                    <span>ROI analysis of six campuses shows an average return of <strong>223%</strong>, demonstrating significant value and efficiency gains.</span>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="my-6 border-t border-slate-200"></div>
 
@@ -230,27 +273,27 @@
                             <!-- ROI Data as a List -->
                             <div class="p-2 bg-white rounded-md border border-slate-200">
                                 <h4 class="text-gray-900 text-sm">CSU LA</h4>
-                                <div class="flex justify-between text-xs mt-1"><span>Savings: $89,500</span> <span class="font-extrabold text-green-600">ROI: 167%</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span>Savings: $89,500</span> <span class="font-extrabold" style="color:#8dc73f;">ROI: 167%</span></div>
                             </div>
                             <div class="p-2 bg-white rounded-md border border-slate-200">
                                 <h4 class="text-gray-900 text-sm">Cal Poly SLO</h4>
-                                <div class="flex justify-between text-xs mt-1"><span>Savings: $56,188</span> <span class="font-extrabold text-green-600">ROI: 154%</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span>Savings: $56,188</span> <span class="font-extrabold" style="color:#8dc73f;">ROI: 154%</span></div>
                             </div>
                             <div class="p-2 bg-white rounded-md border border-slate-200">
                                 <h4 class="text-gray-900 text-sm">CSU San Bernardino</h4>
-                                <div class="flex justify-between text-xs mt-1"><span>Savings: $73,352</span> <span class="font-extrabold text-green-600">ROI: 132%</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span>Savings: $73,352</span> <span class="font-extrabold" style="color:#8dc73f;">ROI: 132%</span></div>
                             </div>
                              <div class="p-2 bg-white rounded-md border border-slate-200">
                                 <h4 class="text-gray-900 text-sm">CSU Fresno</h4>
-                                <div class="flex justify-between text-xs mt-1"><span>Savings: $60,225</span> <span class="font-extrabold text-green-600">ROI: 107%</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span>Savings: $60,225</span> <span class="font-extrabold" style="color:#8dc73f;">ROI: 107%</span></div>
                             </div>
                             <div class="p-2 bg-white rounded-md border border-slate-200">
                                 <h4 class="text-gray-900 text-sm">CSU Fullerton</h4>
-                                <div class="flex justify-between text-xs mt-1"><span>Savings: $205,157</span> <span class="font-extrabold text-green-600">ROI: 246%</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span>Savings: $205,157</span> <span class="font-extrabold" style="color:#8dc73f;">ROI: 246%</span></div>
                             </div>
                             <div class="p-2 bg-white rounded-md border border-slate-200">
                                 <h4 class="text-gray-900 text-sm">CSU Sonoma</h4>
-                                <div class="flex justify-between text-xs mt-1"><span>Savings: $82,547</span> <span class="font-extrabold text-green-600">ROI: 529%</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span>Savings: $82,547</span> <span class="font-extrabold" style="color:#8dc73f;">ROI: 529%</span></div>
                             </div>
                         </div>
                     </div>
